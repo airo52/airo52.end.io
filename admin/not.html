@@ -1,0 +1,125 @@
+<style>
+    #card{
+    background-color: bisque;
+}
+#notificationCenter{
+    height: 350px;
+    overflow-y: auto;
+}
+</style>
+        <div id="card" class="card">
+            <div class="header">
+                <h4 class="title">Notifications</h4>
+               
+            </div>
+            <div id="notificationCenter" class="content">
+            
+                <div class="row">
+            <div class="col-md-12">
+            <h5>Notifications</h5>
+               <!--start of messages-->   
+           
+             <div id="notify">
+                
+             </div>
+             
+
+        
+
+        </div> 
+              <!--end of messages-->      
+                        
+                    </div>
+                   
+                    </div>
+</div>
+</div>
+                    <!--start of mesaage-->
+
+
+
+
+     <div class="card">
+     <div class="header">
+    <h4 class="title">Notifications</h4>
+                           
+    </div>
+    <div class="content">
+    <div class="row">
+     
+    <div class="col-md-6">
+        <div class="row">            
+         <span class="col-md-4">Full Name</span>
+         <span id="name" class="col-md-6"></span>       
+        </div> 
+        <div class="row">            
+            <span class="col-md-4">Email</span>
+            <span  id="email" class="col-md-6"></span>       
+        </div> 
+        <div class="row">            
+            <span class="col-md-4">Phone</span>
+            <span id="phone"class="col-md-6"></span>       
+        </div> 
+        <div class="row">            
+            <span class="col-md-4">message</span>
+           <b><span id="messag"class="col-md-6"></span> </b>      
+        </div> 
+
+    </div></div>
+    </div>
+    </div>
+    <script>
+        function read(data){
+            $('#'+data).remove();
+            var control ='contact';
+            var data = 'control='+control+'&id='+data;
+              
+              
+              
+              $.ajax({
+                  method:'post',
+                  data:data,
+                  url:'server/index.php',
+                  cache:false,
+                  success:function(res){
+                     var response= JSON.parse(res);
+                   // console.log(res)
+                   $('#name').html(response.username);
+                   $('#email').html(response.email);
+                   $('#phone').html(response.phone);
+                   $('#messag').html(response.message);
+                  
+                  
+                  }
+              })
+ 
+              
+
+            }
+
+
+
+    
+
+        $('document').ready(function(){
+            $control ='contacts';
+            var data = 'control='+$control;
+              //value.remove();
+              
+              //var value= document.getElementById(data);
+              $.ajax({
+                  method:'post',
+                  data:data,
+                  url:'server/index.php',
+                  cache:false,
+                  success:function(responseText){
+                   // var response=  JSON.parse(res);
+                   $('#notify').append(responseText)
+                   
+                  }
+              })
+            
+        })
+      
+    
+    </script>
